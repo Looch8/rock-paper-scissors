@@ -3,13 +3,13 @@
 function computerPlay() {
      const randomValue = Math.floor(Math.random() * 3);
     if (randomValue == "0") {
-        return "Rock";
+        return "rock";
     }
     else if (randomValue == "1") {
-        return "Paper";
+        return "paper";
     } 
     else {
-        return "Scissors";
+        return "scissors";
     }
 }
 
@@ -17,19 +17,23 @@ function computerPlay() {
 //play single round of RPS
 
 function playRound(playerSelection, computerSelection) {
-    if (playerSelection === "Rock" && computerSelection === "Scissors") {
+    //convert player selection to all lowercase
+
+    if (playerSelection === "rock" && computerSelection === "scissors") {
         return "You Win! Rock beats Scissors";
     }
-    else if (playerSelection === "Rock" && computerSelection === "Paper") {
+    else if (playerSelection === "rock" && computerSelection === "paper") {
         return "You Lose! Paper beats Rock!";
     }
-    else if (playerSelection === "Rock" && computerSelection === "Rock") {
+    else if (playerSelection === "rock" && computerSelection === "rock") {
         return "Draw!"
     }
 }
+//Maybe turn this into an array ^??
 
-const playerSelection = "Rock";
+const playerSelection = prompt("Rock, Paper, or Scissors?").toLowerCase();
 const computerSelection = computerPlay();
+
 console.log(playRound(playerSelection, computerSelection));
 // create a function 'playerSelection' that will prompt user to choose either 'rock, paper or scissors'
 //  playerSelection paramaters should be case-insensitive - user can input rock, ROCK, RocK etc 

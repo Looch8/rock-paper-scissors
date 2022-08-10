@@ -1,95 +1,56 @@
-let playerScore = 0
-let computerScore = 0
+const computerSelectionDisplay = document.getElementById('computer-selection')
+const playerSelectionDisplay = document.getElementById('player-selection')
+const resultDisplay = document.getElementById('result')
+const possibleChoices = document.querySelectorAll('button')
+let playerSelection
+let computerSelection
+let result
 
-//computerPlay
-// create function that randomly returns either 'Rock, Paper, or scissors'
-function computerPlay() {
-     const randomValue = Math.floor(Math.random() * 3);
-    if (randomValue == "0") {
-        return "rock";
+possibleChoices.forEach(possibleChoice => possibleChoice.addEventListener('click', (e) => {
+    playerSelection = e.target.id
+    playerSelectionDisplay.innerHTML = playerSelection
+    generateComputerSelection()
+    getResult()
+}))
+
+function generateComputerSelection() {
+    const randomNumber = Math.floor(Math.random() * 3) + 1
+    console.log(randomNumber)
+
+    if (randomNumber === 1) {
+        computerSelection = 'rock'
     }
-    else if (randomValue == "1") {
-        return "paper";
-    } 
-    else {
-        return "scissors";
+    if (randomNumber === 2) {
+        computerSelection = 'paper'
     }
+    if (randomNumber === 3) {
+        computerSelection = 'scissors'
+    }
+    computerSelectionDisplay.innerHTML = computerSelection
 }
 
-//play single round of RPS
-
-function playRound(playerSelection, computerSelection) {
-    
-    //rock
-    if (playerSelection === "rock" && computerSelection === "scissors") {
-        return "You Win! Rock beats Scissors";
-        playerScore++;
+function getResult() {
+    if (computerSelection === playerSelection) {
+        result = 'Draw!'
     }
-    else if (playerSelection === "rock" && computerSelection === "paper") {
-        return "You Lose! Paper beats Rock!";
-        computerScore++;
+    if (computerSelection === 'rock' && playerSelection === 'scissors') {
+        result = 'you lost!'
     }
-    //paper
-    if (playerSelection === "paper" && computerSelection === "rock") {
-        return "You Win! Paper beats Rock";
-        playerScore++;
+    if (computerSelection === 'rock' && playerSelection === 'paper') {
+        result = 'you won!'
     }
-    else if (playerSelection === "paper" && computerSelection === "scissors") {
-        return "You Lose! Scissors beats Paper";
-       computerScore++;
+    if (computerSelection === 'paper' && playerSelection === 'rock') {
+        result = 'you lost!'
     }
-    //scissors    
-    if (playerSelection === "scissors" && computerSelection === "paper") {
-        return "You Win! Scissors beats Paper";
-        playerScore++;
+    if (computerSelection === 'paper' && playerSelection === 'scissors') {
+        result = 'you won!'
     }
-    else if (playerSelection === "scissors" && computerSelection === "rock") {
-        return "You Lose! Rock beats Scissors";
-        computerScore++;
+    if (computerSelection === 'scissors' && playerSelection === 'paper') {
+        result = 'you lost!'
     }
-    //draw
-    else if (playerSelection === computerSelection) {
-        return "Draw!";
-    }
-    //Non-viable entry
-    else {
-        return "Please play the game properly";
+    if (computerSelection === 'scissors' && playerSelection === 'rock') {
+        result = 'you won!'
     }
 
-    if (playerScore === 5) {
-        return "Player wins!";
-    }
-    if (computerScore === 5) {
-        return "Computer wins!";
-    }
+    resultDisplay.innerHTML = result
 }
-
-//convert player selection to all lowercase
-const playerSelection = prompt("Rock, Paper, or Scissors?").toLowerCase();
-const computerSelection = computerPlay();
-
-console.log(playRound(playerSelection, computerSelection));
- 
-/*
- Write a NEW function called game(). Call the playRound function inside of 
- this one to play a 5 round game that keeps score and reports a winner or 
- loser at the end.
- */
-//function game() {
-    //for (let i = 0; i < 5; i++) {
-        //text += "Round " + i;
-    //}
-
-    //if (computerScore === 5 || playerScore === 5) {
-        //return "Game over!"
-    //}
-    
-
-//}
-
- 
- 
-
- // Declare winners.
-
-//refer to odin website for more detailed instructions.

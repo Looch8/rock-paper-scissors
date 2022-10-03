@@ -2,8 +2,10 @@
 
 // DOM
 const buttons = document.querySelectorAll(`.btn`);
-const playerChoice = document.querySelector(`#player-selection`);
-const computerChoice = document.querySelector(`#computer-selection`);
+let result = document.querySelector(`#result`);
+let playerChoice = document.querySelector(`#player-selection`);
+let computerChoice = document.querySelector(`#computer-selection`);
+// let computerChoice = document.querySelector.textContent(`#computer-selection`);
 
 //Score variables
 let round = 0;
@@ -28,16 +30,22 @@ const getComputerChoice = function () {
 // playing round of RPS
 const playerRound = function (playerSelection, computerSelection) {
   if (playerSelection === computerSelection) {
-    return `Draw!, you both picked ${playerSelection}`;
+    result.textContent = `Draw!, you both picked ${playerSelection}`;
+    playerChoice.textContent = playerSelection;
+    computerChoice.textContent = computerSelection;
   } else if (
     (playerSelection === `rock` && computerSelection === `scissors`) ||
     (playerSelection === `paper` && computerSelection === `rock`) ||
     (playerSelection === `scissors` && computerSelection === `paper`)
   ) {
-    return `You win!, ${playerSelection} beats ${computerSelection}`;
+    result.textContent = `You win!, ${playerSelection} beats ${computerSelection}`;
+    playerChoice.textContent = playerSelection;
+    computerChoice.textContent = computerSelection;
     playerScore++;
   } else {
-    return `You Lose!, ${computerSelection} beats ${playerSelection}`;
+    result.textContent = `You Lose!, ${computerSelection} beats ${playerSelection}`;
+    playerChoice.textContent = playerSelection;
+    computerChoice.textContent = computerSelection;
     computerScore++;
   }
 };

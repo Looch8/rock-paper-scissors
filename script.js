@@ -2,12 +2,15 @@
 
 // DOM
 const buttons = document.querySelectorAll(`.btn`);
+const playerChoice = document.querySelector(`#player-selection`);
+const computerChoice = document.querySelector(`#computer-selection`);
 
 //Score variables
 let round = 0;
 let playerScore = 0;
 let computerScore = 0;
 let playerSelection;
+let computerSelection;
 
 //Random computer selection
 const getComputerChoice = function () {
@@ -24,7 +27,6 @@ const getComputerChoice = function () {
 
 // playing round of RPS
 const playerRound = function (playerSelection, computerSelection) {
-  playerSelection;
   if (playerSelection === computerSelection) {
     return `Draw!, you both picked ${playerSelection}`;
   } else if (
@@ -39,16 +41,26 @@ const playerRound = function (playerSelection, computerSelection) {
     computerScore++;
   }
 };
-
-const computerSelection = getComputerChoice();
+// for (let i = 0; i < buttons.length; i++) {
+//   buttons[i].addEventListener(`click`, playerRound);
+// }
 
 // Clicking button - player choice.
-buttons.forEach((button) => {
-  button.addEventListener(`click`, () => {
-    playerSelection = button.textContent;
-    console.log(playerSelection);
+buttons.forEach((btn) => {
+  btn.addEventListener(`click`, () => {
+    playerSelection = btn.textContent;
+    computerSelection = getComputerChoice();
+    playerRound(playerSelection, computerSelection);
+    console.log(playerRound(playerSelection, computerSelection));
+    // if (playerScore === 5 || computerScore === 5) {
+    //   declareWinner();
+    // }
   });
 });
+
+// document.querySelector(`.btn`).addEventListener(`click`, function () {
+//   playerRound();
+// });
 
 // console.log(computerSelection);
 // console.log(playerRound(playerSelection, computerSelection));

@@ -2,10 +2,11 @@
 
 // DOM
 const buttons = document.querySelectorAll(`.btn`);
-let result = document.querySelector(`#result`);
-let playerChoice = document.querySelector(`#player-selection`);
-let computerChoice = document.querySelector(`#computer-selection`);
-// let computerChoice = document.querySelector.textContent(`#computer-selection`);
+const result = document.querySelector(`#result`);
+const playerChoice = document.querySelector(`#player-selection`);
+const computerChoice = document.querySelector(`#computer-selection`);
+const playerScoreEm = document.querySelector(`#player-score`);
+const computerScoreEm = document.querySelector(`#computer-score`);
 
 //Score variables
 let round = 0;
@@ -42,11 +43,13 @@ const playerRound = function (playerSelection, computerSelection) {
     playerChoice.textContent = playerSelection;
     computerChoice.textContent = computerSelection;
     playerScore++;
+    playerScoreEm.textContent = playerScore;
   } else {
     result.textContent = `You Lose!, ${computerSelection} beats ${playerSelection}`;
     playerChoice.textContent = playerSelection;
     computerChoice.textContent = computerSelection;
     computerScore++;
+    computerScoreEm.textContent = computerScore;
   }
 };
 // for (let i = 0; i < buttons.length; i++) {
@@ -59,12 +62,13 @@ buttons.forEach((btn) => {
     playerSelection = btn.textContent;
     computerSelection = getComputerChoice();
     playerRound(playerSelection, computerSelection);
-    console.log(playerRound(playerSelection, computerSelection));
     // if (playerScore === 5 || computerScore === 5) {
     //   declareWinner();
     // }
   });
 });
+
+//Gameover
 
 // document.querySelector(`.btn`).addEventListener(`click`, function () {
 //   playerRound();

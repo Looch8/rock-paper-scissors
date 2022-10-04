@@ -65,7 +65,7 @@ buttons.forEach((btn) => {
     // Winning condition
     if (playerScore === 5 || computerScore === 5) {
       declareWinner();
-      playing = false;
+      // playing = false;
     }
   });
 });
@@ -77,6 +77,9 @@ const declareWinner = function () {
     winnerEm.textContent = ` Computer wins ${computerScore} vs ${playerScore}`;
   }
 };
+
+//Reset game
+
 //Gameover
 // if (playerScore === 5 || computerScore === 5) {
 //   declareWinner();

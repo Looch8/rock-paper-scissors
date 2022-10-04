@@ -1,0 +1,14 @@
+body {
+  background-color: pink;
+}
+
+.buttons {
+  display: grid;
+  height: 30rem;
+}
+
+.btn {
+  font-size: large;
+  font-weight: 100;
+  font-style: italic;
+}

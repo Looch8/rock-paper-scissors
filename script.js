@@ -7,6 +7,8 @@ const playerChoice = document.querySelector(`#player-selection`);
 const computerChoice = document.querySelector(`#computer-selection`);
 const playerScoreEm = document.querySelector(`#player-score`);
 const computerScoreEm = document.querySelector(`#computer-score`);
+const winnerEm = document.querySelector(`#winner`);
+let playing = true;
 
 //Score variables
 let round = 0;
@@ -31,7 +33,7 @@ const getComputerChoice = function () {
 // playing round of RPS
 const playerRound = function (playerSelection, computerSelection) {
   if (playerSelection === computerSelection) {
-    result.textContent = `Draw!, you both picked ${playerSelection}`;
+    result.textContent = ` Draw!, you both picked ${playerSelection}`;
     playerChoice.textContent = playerSelection;
     computerChoice.textContent = computerSelection;
   } else if (
@@ -39,22 +41,19 @@ const playerRound = function (playerSelection, computerSelection) {
     (playerSelection === `paper` && computerSelection === `rock`) ||
     (playerSelection === `scissors` && computerSelection === `paper`)
   ) {
-    result.textContent = `You win!, ${playerSelection} beats ${computerSelection}`;
+    result.textContent = ` You win!, ${playerSelection} beats ${computerSelection}`;
     playerChoice.textContent = playerSelection;
     computerChoice.textContent = computerSelection;
     playerScore++;
     playerScoreEm.textContent = playerScore;
   } else {
-    result.textContent = `You Lose!, ${computerSelection} beats ${playerSelection}`;
+    result.textContent = ` You Lose!, ${computerSelection} beats ${playerSelection}`;
     playerChoice.textContent = playerSelection;
     computerChoice.textContent = computerSelection;
     computerScore++;
     computerScoreEm.textContent = computerScore;
   }
 };
-// for (let i = 0; i < buttons.length; i++) {
-//   buttons[i].addEventListener(`click`, playerRound);
-// }
 
 // Clicking button - player choice.
 buttons.forEach((btn) => {
@@ -62,13 +61,26 @@ buttons.forEach((btn) => {
     playerSelection = btn.textContent;
     computerSelection = getComputerChoice();
     playerRound(playerSelection, computerSelection);
-    // if (playerScore === 5 || computerScore === 5) {
-    //   declareWinner();
-    // }
+
+    // Winning condition
+    if (playerScore === 5 || computerScore === 5) {
+      declareWinner();
+      playing = false;
+    }
   });
 });
 
+const declareWinner = function () {
+  if (playerScore === 5) {
+    winnerEm.textContent = ` Player wins ${playerScore} vs ${computerScore}`;
+  } else if (computerScore === 5) {
+    winnerEm.textContent = ` Computer wins ${computerScore} vs ${playerScore}`;
+  }
+};
 //Gameover
+// if (playerScore === 5 || computerScore === 5) {
+//   declareWinner();
+// }
 
 // document.querySelector(`.btn`).addEventListener(`click`, function () {
 //   playerRound();

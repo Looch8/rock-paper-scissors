@@ -58,14 +58,15 @@ const playerRound = function (playerSelection, computerSelection) {
 // Clicking button - player choice.
 buttons.forEach((btn) => {
   btn.addEventListener(`click`, () => {
-    playerSelection = btn.textContent;
-    computerSelection = getComputerChoice();
-    playerRound(playerSelection, computerSelection);
+    if (playing) {
+      playerSelection = btn.textContent;
+      computerSelection = getComputerChoice();
+      playerRound(playerSelection, computerSelection);
 
-    // Winning condition
-    if (playerScore === 5 || computerScore === 5) {
-      declareWinner();
-      // playing = false;
+      // Winning condition
+      if (playerScore === 5 || computerScore === 5) {
+        declareWinner();
+      }
     }
   });
 });
@@ -73,40 +74,27 @@ buttons.forEach((btn) => {
 const declareWinner = function () {
   if (playerScore === 5) {
     winnerEm.textContent = ` Player wins ${playerScore} vs ${computerScore}`;
+    playing = false;
   } else if (computerScore === 5) {
     winnerEm.textContent = ` Computer wins ${computerScore} vs ${playerScore}`;
+    playing = false;
   }
 };
 
 //Reset game
+document.querySelector(`.again`).addEventListener(`click`, function () {
+  round = 0;
+  playerScore = 0;
+  computerScore = 0;
+  playerSelection = "";
+  computerSelection = "";
 
-//Gameover
-// if (playerScore === 5 || computerScore === 5) {
-//   declareWinner();
-// }
+  computerScoreEm.textContent = computerScore;
+  playerScoreEm.textContent = playerScore;
+  playerChoice.textContent = playerSelection;
+  computerChoice.textContent = computerSelection;
+  winnerEm.textContent = "";
+  result.textContent = "";
 
-// document.querySelector(`.btn`).addEventListener(`click`, function () {
-//   playerRound();
-// });
-
-// console.log(computerSelection);
-// console.log(playerRound(playerSelection, computerSelection));
-
-// 5 round game and score
-// const game = function () {
-//   round = 0;
-//   //   playerRound(playerSelection, computerSelection);
-//   for (let i = 0; i < 5; i++) {
-//     // round += round;
-//     // computerSelection;
-//     playerRound(playerSelection, computerSelection);
-//     // playerSelection = prompt(`Please choose, rock, paper, or scissors`);
-//     round++;
-//     console.log(playerRound(playerSelection, computerSelection));
-//     console.log(round);
-//     // playerRound();
-//     // round++;
-//   }
-// };
-// let gameResult = game();
-// console.log(gameResult);
+  playing = true;
+});
